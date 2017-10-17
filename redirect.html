@@ -6,22 +6,18 @@
 function getMobileOperatingSystem() {
   var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-      // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
-        return "Windows Phone";
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "iOS";
     }
 
     if (/android/i.test(userAgent)) {
         return "Android";
     }
 
-    // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return "iOS";
-    }
-
     return "unknown";
+
 }</script>
+
 
 <script>
 function DetectAndServe(){
@@ -32,14 +28,13 @@ if (getMobileOperatingSystem() == "Android") {
 if (getMobileOperatingSystem() == "iOS") {
     window.location.href = "https://itunes.apple.com/us/app/%D9%85%D9%86%D8%A7%D8%B1%D8%A9-%D8%A7%D9%84%D8%B5%D8%AD%D8%A9-%D9%85%D9%83%D9%87-%D8%A7%D9%84%D9%85%D9%83%D8%B1%D9%85%D9%87/id1277207450?mt=8";
     }
-if (getMobileOperatingSystem() == "Windows Phone") {
-    window.location.href = "http://www.kamc.med.sa";
-    }
+
 if (getMobileOperatingSystem() == "unknown") {
   window.location.href = "http://www.kamc.med.sa";}
 };
 </script>
 </head>
 <body onload="DetectAndServe()">
+redirecting..
 </body>
 </html>
