@@ -1,40 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-<script>
-function getMobileOperatingSystem() {
-  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+<html>
+  <head>
+    <title>YouTube</title>
+    <meta name="author" content="Google, Inc.">
+    <meta name="apple-itunes-app" content="app-id=1277207450">
+    <meta name="google-play-app" content="app-id=com.sa.med.kamc">
 
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return "iOS";
-    }
+    <link rel="stylesheet" href="jquery.smartbanner.css" type="text/css" media="screen">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  </head>
+  <body>
+    ...
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script src="jquery.smartbanner.js"></script>
+    <script type="text/javascript">
+      $().smartbanner();
+    </script>
+    <script type="text/javascript">
+    var android = location.href.match(/#android$/) || navigator.userAgent.match(/Android/i) != null;
+    $.smartbanner({
+      title: 'منارة الصحة',
+      author: 'مدينة الملك عبد الله الطبية',
+      icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPlLD7_-U1K71Sec6eULXnd4hiXnfgwO7AhtnJlkFdgh_oHUo59Q',
+      force: android ? 'android' : 'ios', daysHidden: 0, daysReminder: 0
+    });
 
-    if (/android/i.test(userAgent)) {
-        return "Android";
-    }
+    $('.theme-toggle').on('click', function(e) {
+      e.preventDefault();
+      $.smartbanner('switchType')
+      $(this).text($(this).text() == 'Preview Android' ? 'Preview iOS' : 'Preview Android')
+    })
 
-    return "unknown";
+    if (android) $('.theme-toggle').text('Preview iOS');
+    </script>
 
-}</script>
-
-
-<script>
-function DetectAndServe(){
-
-if (getMobileOperatingSystem() == "Android") {
-    window.location.href = "https://play.google.com/store/apps/details?id=com.sa.med.kamc&hl=en";
-    }
-if (getMobileOperatingSystem() == "iOS") {
-    window.location.href = "https://itunes.apple.com/us/app/%D9%85%D9%86%D8%A7%D8%B1%D8%A9-%D8%A7%D9%84%D8%B5%D8%AD%D8%A9-%D9%85%D9%83%D9%87-%D8%A7%D9%84%D9%85%D9%83%D8%B1%D9%85%D9%87/id1277207450?mt=8";
-    }
-
-if (getMobileOperatingSystem() == "unknown") {
-  window.location.href = "http://www.kamc.med.sa";}
-};
-</script>
-</head>
-<body onload="DetectAndServe()">
-redirecting..
-</body>
+  </body>
 </html>
